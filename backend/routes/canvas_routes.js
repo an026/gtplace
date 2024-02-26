@@ -5,7 +5,7 @@ const {getCanvas, createCanvas, updateCanvas} = require("../controllers/canvas_c
 router.get("/", getCanvas)
 
 // make this a get request so i don't have to install postman
-router.get("/create", createCanvas)
+// router.get("/create", createCanvas)
 
 router.post("/", updateCanvas)
 
