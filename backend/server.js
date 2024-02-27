@@ -1,9 +1,11 @@
 // IMPORTS
 require("dotenv").config({path: "./.env"})
 const express = require("express")
+const {getClient} = require("./db")
 
 // ROUTE FILES
-const testRoutes = require("./routes/test")
+// const testRoutes = require("./routes/test")
+const canvasRoutes = require("./routes/canvas_routes")
 
 // create express app
 const app = express()
@@ -21,9 +23,20 @@ app.use((request, response, next) => {
 
 
 // this line and the test.js file are just for testing, remove and replace these later
-app.use("/api/test", testRoutes)
+// app.use("/api/test", testRoutes)
 
-// Starts the server
-app.listen(process.env.PORT, () => {
-    console.log("Server started on port: " + process.env.PORT)
-})
+app.use("/api/canvas", canvasRoutes)
+
+
+// Connect to database
+const client = getClient()
+client.connect()
+    .then(() => {
+        // Starts the server
+        app.listen(process.env.PORT, () => {
+            console.log("Connected to database + Server started on port: " + process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
