@@ -21,6 +21,7 @@ app.use((request, response, next) => {
     next() // every time I setup some middleware listener (.use or like .get or .post etc...), I need to either return a response, or call the next(), otherwise this function never resolves
 })
 
+app.use(express.json())
 
 // this line and the test.js file are just for testing, remove and replace these later
 // app.use("/api/test", testRoutes)
